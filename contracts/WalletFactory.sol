@@ -27,6 +27,8 @@ contract WalletFactory is IWalletFactory {
         (bool ok,) = wallet.call(abi.encodeWithSelector(0x946d9204, initialOwner, initialGuardians));
 
         if(!ok) revert WalletAlreadyExists(accountHash, getCounterfactualWallet(accountHash));
+
+        emit NewWallet(wallet, initialOwner);
     }
 
     function getCounterfactualWallet(bytes32 accountHash) public view returns(address) {

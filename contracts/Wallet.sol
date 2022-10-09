@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 // Libraries
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "@openzeppelin/contracts/utils//math/Math.sol";
 
 
 /// @author credit to https://github.com/verumlotus/social-recovery-wallet.git
@@ -99,7 +98,7 @@ contract Wallet {
     function _checkSignature(bytes32 txHash, bytes memory signature) internal view {
         bytes32 messageHash = ECDSA.toEthSignedMessageHash(txHash);
 
-        require(owner != ECDSA.recover(messageHash, signature));
+        require(owner == ECDSA.recover(messageHash, signature));
     }
 
    // GUARDIAN MANAGEMENT
